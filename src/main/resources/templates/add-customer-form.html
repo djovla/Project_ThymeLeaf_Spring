@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Add Customers</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+</head>
+<body>
+	<div class="container">
+		<h2>Add Customer</h2>
+		<hr />
+		<!-- This is the form to Enter Customer Information and send it to saveCustomer handler in the controller -->
+		<form action="#" th:action="@{/saveCustomer}" th:object="${customers}"
+			method="POST">
+
+			<span th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Full
+				name error</span> 
+				<input type="text" th:field="*{name}"
+				placeholder="Enter name" class="form-control col-4 mb-4" /> 
+				<span
+				th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email
+				error</span> 
+				<input type="text" th:field="*{email}"
+				placeholder="Enter email" class="form-control col-4 mb-4" /> <span
+				th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">Phone
+				error</span> 
+				<input type="text" th:field="*{phone}"
+				placeholder="Enter phone" class="form-control col-4 mb-4" />
+
+			<button class="btn btn-primary" type="submit">Save</button>
+			<input type="hidden" th:fiel="*{id}">
+		</form>
+		<hr />
+		<a th:href="@{/list}">Back to List</a>
+	</div>
+</body>
+</html>

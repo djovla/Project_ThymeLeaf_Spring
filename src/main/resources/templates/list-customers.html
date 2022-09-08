@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>List of Customers</title>
+<link rel="stylesheet" type="text/css" 
+href="https://cdn.datatables.net/v/bs4/dt-1.12.1/datatables.min.css"/>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+</head>
+<body>
+	<div class="container">
+		<h3>List Customers</h3>
+		<hr />
+		<a th:href="@{/addCustomersForm}" class="btn btn-primary mb-2">Add Customer</a>
+		<a th:href="@{/searchCustomersForm}" class="btn btn-primary mb-2">Search Customer</a>
+		<table class="table table-bordered table-striped" id="customerTable">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Email</th>
+					<th>Phone</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="customer: ${customers}">
+					<td th:text="${customer.name}"></td>
+					<td th:text="${customer.email}"></td>
+					<td th:text="${customer.phone}"></td>
+					<td>
+					<a th:href="@{/showUpdateForm(customerId=${customer.id})}" class="btn btn-info">Update</a>
+					<a th:href="@{/customerDelete(customerId=${customer.id})}" class="btn btn-danger ml-2">Delete</a>
+					</td>
+				</tr>
+
+			</tbody>
+		</table>
+	</div>
+	<!-- This is the insertion of JQuery for the sort and Search in the table JQuery Table -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.12.1/datatables.min.js"></script>
+	<script>
+	$(document).ready(function(){
+		$("#customerTable").DataTable({
+			'aoColumnDefs':[{
+				'bSortable':false,
+				'aTargets':[-1]
+			}]
+		});
+	})
+	</script>
+</body>
+</html>

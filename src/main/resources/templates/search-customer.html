@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Search Customer</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+</head>
+<body>
+	<div class="container">
+	<h2>Search Customer</h2>
+	<hr/>
+	<!-- This is the form to Enter Customer Information and send it to saveCustomer handler in the controller
+	code to modify -->
+	<form action ="#" th:action="@{/search}" th:object="${customers}" method="post">
+	<input type="text" th:field="*{id}" placeholder="Enter Id" class="form-control col-4 mb-4"/>
+	<button class="btn btn-info" type="submit">Search</button>
+	<table class="table table-bordered table-striped">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Email</th>
+					<th>Phone</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td th:text="${customers.name}"></td>
+					<td th:text="${customers.email}"></td>
+					<td th:text="${customers.phone}"></td>
+				</tr>
+
+			</tbody>
+		</table>
+	</form>
+	<hr/>
+	<a th:href="@{/list}">Back to List</a>	
+	</div>
+</body>
+</html>
