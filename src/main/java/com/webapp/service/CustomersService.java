@@ -25,7 +25,12 @@ public class CustomersService {
     
     public Customers getCustomerById(Long CustomerId)
     {
-    	return customerRepo.findById(CustomerId).get();
+        boolean testCustomer =customerRepo.existsById(CustomerId);
+        if(testCustomer)
+        return customerRepo.findById(CustomerId).get();
+        else
+        	return null;
+    
     }
     
     public void deleteCustomerById(Long CustomerId)

@@ -59,6 +59,7 @@ public class CustomersController {
 		mav.addObject("customers", customerSer.getCustomerById(customerId));
 		return mav;
 	}
+	
 
 	@GetMapping("/customerDelete")
 	public String delteCustomer(@RequestParam Long customerId) {
@@ -87,11 +88,14 @@ public class CustomersController {
 	@PostMapping("/search")
 	public String searchCustomer(@ModelAttribute("virgo") Customers c, BindingResult bindingResult, Model model) {
 
-		// System.out.println("The value of Id "+ c.getId());
-
+		//Verifying the result if null return the page whit no value else perform the search
+        if(customerSer.getCustomerById(c.getId()) == null){
+        	return "redirect:/searchCustomersForm";
+         }
+        else {
 		model.addAttribute("customers", customerSer.getCustomerById(c.getId()));
 		return "search-customer";
-
+        }
 	}
 	/*
 	 * @PostMapping("/search") public ModelAndView searchCustomer(@RequestParam Long
